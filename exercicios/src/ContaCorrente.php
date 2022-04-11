@@ -1,7 +1,7 @@
 <?php
 class ContaCorrente
 {
-    private $titular;
+    private Titular $titular;
     private float $saldo;
     private static int $numeroDeContas = 0;
 
@@ -61,7 +61,7 @@ class ContaCorrente
 
     public function recuperaCpfTitular(): string 
     {
-        return $this->titular->recuperaCpf();
+        return $this->titular->recuperaCpfNumero();
     }
 
     public static function recuperaNumeroDeContas(): int 

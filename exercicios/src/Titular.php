@@ -2,9 +2,9 @@
 class Titular
 {
     private string $nome;
-    private string $cpf;
+    private Cpf $cpf;
 
-    public function __construct($nome, $cpf)
+    public function __construct($nome, Cpf $cpf)
     {
         $this->nome = $nome;
         $this->validaNome($nome);
@@ -18,13 +18,13 @@ class Titular
         }
     }
 
-    public function recuperaCpf(): string 
-    {
-        return $this->cpf;
-    }
-
     public function recuperaNome(): string 
     {
         return $this->nome;
+    }
+
+    public function recuperaCpfNumero(): string 
+    {
+        return $this->cpf->recuperaCpf();
     }
 }
