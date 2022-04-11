@@ -1,16 +1,13 @@
 <?php
 class ContaCorrente
 {
-    private string $cpfTitular;
-    private string $nomeTitular;
+    private $titular;
     private float $saldo;
-    private static $numeroDeContas = 0;
+    private static int $numeroDeContas = 0;
 
-    public function __construct (string $nome, string $cpf)
+    public function __construct (Titular $titular)
     {
-        $this->nomeTitular = $nome;
-        $this->validaTitular($nome);
-        $this->cpfTitular = $cpf;
+        $this->titular = $titular;
         $this->saldo = 0;
 
         self::$numeroDeContas++;
@@ -57,21 +54,14 @@ class ContaCorrente
         return $this->saldo;
     }
 
-    public function recuperaCpfTitular(): string
-    {
-        return $this->cpfTitular;
-    }
-
     public function recuperaNomeTitular(): string 
     {
-        return $this->nomeTitular;
+        return $this->titular->recuperaNome();
     }
 
-    private function validaTitular($nome): void 
+    public function recuperaCpfTitular(): string 
     {
-        if (strlen($nome) < 5) {
-            echo "Um nome válido deve ter pelo menos 5 caracteres.";
-        }
+        return $this->titular->recuperaCpf();
     }
 
     public static function recuperaNumeroDeContas(): int 
