@@ -1,72 +1,92 @@
 <?php
 
-namespace Banco\exercicios\Modelo\Conta;
+namespace Banco\Modelo\Conta;
 
-abstract class Conta 
+class Conta 
 {
-    private int $tipo; //1- Conta corrente; 2- Conta poupança; 3- Conta salário
-    private int $numero = 0; 
-    private Titular $titular;
-    protected float $saldo = 0;
+    private string $tipo;
+    private int $numero;
+    private string $cpf;
+    private string $nome;
+    private float $saldo;
     private static int $numeroDeContas = 0;
-
-    public function __construct (int $numTipo, Titular $novoTitular)
+    
+    public function __construct (string $tipo, string $cpf, string $nome, float $saldo)
     {
-        $this->tipo = $numTipo;
-        $this->numero++;
-        $this->titular = $novoTitular;
+        $this->tipo = $tipo;
+        $this->numero = self::$numeroDeContas + 1;
+        $this->cpf = $cpf;
+        $this->nome = $nome;
+        $this->saldo = $saldo;
+
         self::$numeroDeContas++;
     }
 
-    public function __distruct()
+    public function recuperaTipo(): string 
     {
-        self::$numeroDeContas--;
+        return $this->tipo;
     }
 
-    abstract function selecionaTipo(): int;
-
-    public function recuperaTipo(): void 
+    public function recuperaNumero(): int 
     {
-        echo $this->tipo . "\t";
+        return $this->numero;
     }
 
-    public function recuperaTitular(): void 
+    public function recuperaCPF(): string 
     {
-        echo $this->titular->recuperaNome() . "\t";
+        return $this->cpf;
     }
 
-    public function recuperaSaldo(): void 
+    public function recuperaNome(): string 
     {
-        echo $this->saldo . "\t";
+        return $this->nome;
     }
 
-    public function recuperaNumero(): void 
+    public function recuperaSaldo(): float 
     {
-        echo $this->numero . "\t";
+        return $this->saldo;
     }
 
-    public function saca(float $valor): void 
-    {
-        if ($valor >= $this->saldo)
-        {
-            echo "Saldo indisponível.";
-            return;
-        }
-        $this->saldo -= $valor;
-    }
-
-    public function deposita(float $valor): void 
-    {
-        if ($valor <= 0)
-        {
-            echo "Digite um valor válido.";
-            return;
-        }
-        $this->saldo += $valor;
-    }
-
-    public static function recuperaNumeroDeContas(): int 
+    public function recuperaNumeroDeContas(): int 
     {
         return self::$numeroDeContas;
+    }
+
+    public function recuperaConta(): void 
+    {
+        echo
+        $this->tipo . "\t" .
+        $this->numero . "\t" . 
+        $this->cpf . "\t" . 
+        $this->nome . "\t" . 
+        $this->saldo . "\n";
+    }
+
+    public function saca($valorASacar): void 
+    {
+        if ($this->saldo < $valorASacar or $valorASacar < 0) {
+            echo "Saldo indisponível ou valor inválido.\n";
+            return;
+        }
+        $this->saldo -= $valorASacar;
+    }
+
+    public function deposita($valorADepositar): void 
+    {
+        if ($valorADepositar < 0) {
+            echo "ERRO! Valor inválido.\n";
+            return;
+        }
+        $this->saldo += $valorADepositar;
+    }
+
+    public function transfere($valorATransferir, $contaDeDestio): void 
+    {
+        if ($this->saldo < $valorATransferir || $valorATransferir < 0) {
+            echo "Saldo indisponível ou valor inválido.\n";
+            return;
+        }
+        $this->saca($valorATransferir);
+        $contaDeDestio->deposita($valorATransferir);
     }
 }
