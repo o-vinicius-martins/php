@@ -4,42 +4,30 @@ namespace Banco\Modelo\Conta;
 
 class Conta 
 {
-    private string $tipo;
+    private TipoConta $tipo;
     private int $numero;
-    private string $cpf;
-    private string $nome;
+    private Titular $titular;
     private float $saldo;
     private static int $numeroDeContas = 0;
     
-    public function __construct (string $tipo, string $cpf, string $nome, float $saldo)
+    public function __construct (TipoConta $tipo, Titular $titular, float $saldo)
     {
         $this->tipo = $tipo;
         $this->numero = self::$numeroDeContas + 1;
-        $this->cpf = $cpf;
-        $this->nome = $nome;
+        $this->titular = $titular;
         $this->saldo = $saldo;
 
         self::$numeroDeContas++;
     }
 
-    public function recuperaTipo(): string 
+    public function __distruct()
     {
-        return $this->tipo;
+        self::$numeroDeContas--;
     }
 
     public function recuperaNumero(): int 
     {
         return $this->numero;
-    }
-
-    public function recuperaCPF(): string 
-    {
-        return $this->cpf;
-    }
-
-    public function recuperaNome(): string 
-    {
-        return $this->nome;
     }
 
     public function recuperaSaldo(): float 
@@ -55,10 +43,10 @@ class Conta
     public function recuperaConta(): void 
     {
         echo
-        $this->tipo . "\t" .
-        $this->numero . "\t" . 
-        $this->cpf . "\t" . 
-        $this->nome . "\t" . 
+        $this->numero . "\t" .
+        $this->tipo->recuperaTipo() . "\t" .
+        $this->titular->recuperaNome() . "\t" . 
+        $this->titular->recuperaCPF() . "\t" . 
         $this->saldo . "\n";
     }
 

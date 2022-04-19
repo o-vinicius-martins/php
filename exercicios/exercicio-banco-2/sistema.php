@@ -1,14 +1,23 @@
 <?php
 
-require_once 'src/Modelo/Conta/Conta.php';
+require_once 'autoload.php';
+
+use Banco\Modelo\Conta\Titular;
 use Banco\Modelo\Conta\Conta;
+use Banco\Modelo\Conta\TipoConta;
 
-$conta1 = new Conta('Corrente', '000.000.000-01', 'Vinícius', 100.0);
-$conta2 = new Conta('Poupança', '000.000.000-02', 'Marcos', 500); 
-$conta3 = new Conta('Salário', '000.000.000-03', 'Maria', 250.80);
+$cCorrente = new TipoConta('Corrente');
+$cPoupanca = new TipoConta('Poupança');
+$cSalario = new TipoConta('Salário');
+
+$titular1 = new Titular('Vinícius', '000.000.000-01');
+$titular2 = new Titular('Marcos', '000.000.000-02');
+$titular3 = new Titular('Maria', '000.000.000-03');
+
+$conta1 = new Conta($cCorrente, $titular1, 100.0);
+$conta2 = new Conta($cPoupanca, $titular2, 500); 
+$conta3 = new Conta($cSalario, $titular3, 250.80);
 $contasList = [$conta1, $conta2, $conta3];
-
-$conta1->transfere(20, $conta2);
 
 foreach ($contasList as $conta) {
     $conta->recuperaConta();
