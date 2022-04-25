@@ -19,6 +19,8 @@ $conta2 = new Conta($cPoupanca, $titular2, 500);
 $conta3 = new Conta($cSalario, $titular3, 250.80);
 $contasList = [$conta1, $conta2, $conta3];
 
+$conta1->transfere(125, $conta3);
+
 foreach ($contasList as $conta) {
     $conta->recuperaConta();
 }

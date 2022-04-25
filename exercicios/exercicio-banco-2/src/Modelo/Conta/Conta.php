@@ -74,6 +74,12 @@ class Conta
             echo "Saldo indisponível ou valor inválido.\n";
             return;
         }
+
+        if ($this->tipo->recuperaTipo() != "Corrente") {
+            echo "Só é possível realizar transferências por uma Conta Corrente.\n";
+            return;
+        }
+        
         $this->saca($valorATransferir);
         $contaDeDestio->deposita($valorATransferir);
     }
