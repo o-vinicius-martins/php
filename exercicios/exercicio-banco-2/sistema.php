@@ -6,24 +6,27 @@ use Banco\Modelo\Conta\Titular;
 use Banco\Modelo\Conta\Conta;
 use Banco\Modelo\Conta\TipoConta;
 
-$cCorrente = new TipoConta('Corrente');
-$cPoupanca = new TipoConta('Poupança');
-$cSalario = new TipoConta('Salário');
-
 $titular1 = new Titular('Vinícius', '000.000.000-01');
 $titular2 = new Titular('Marcos', '000.000.000-02');
 $titular3 = new Titular('Maria', '000.000.000-03');
 
-$conta1 = new Conta($cCorrente, $titular1, 100.0);
-$conta2 = new Conta($cPoupanca, $titular2, 500); 
-$conta3 = new Conta($cSalario, $titular3, 250.80);
-$contasList = [$conta1, $conta2, $conta3];
+$cCorrente = new TipoConta('Corrente', $titular1, 200);
+$cPoupanca = new TipoConta('Poupança', $titular2, 500);
+$cSalario = new TipoConta('Salário', $titular3, 800);
 
-$conta1->deposita(200);
-
+//var_dump($cCorrente);
+/*echo $cCorrente->recuperaTipo(); //OK
+echo $cCorrente->recuperaNumero(); //OK
+echo $cCorrente->recuperaSaldo(); //OK
+echo $cCorrente->recuperaTitular()->recuperaNome(); //OK
+echo $cCorrente->recuperaTitular()->recuperaCPF(); //OK
+echo $cCorrente->recuperaNumeroDeContas();// OK*/
+$contasList = [$cCorrente, $cPoupanca, $cSalario];
 foreach ($contasList as $conta) {
     $conta->recuperaConta();
 }
+
+echo $cCorrente->recuperaNumeroDeContas();
 
 //$conta2->saldo -= 200;
 //echo $conta1->tipo;
