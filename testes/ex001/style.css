@@ -20,6 +20,14 @@ section {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.397);
 }
 
+div {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+    font-size: larger;
+    margin: 25px 0;
+}
+
 h1 {
     text-align: center;
     font-family: 'Courier New', Courier, monospace;

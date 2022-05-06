@@ -11,14 +11,22 @@
     <main>
         <section>
             <h1>Exercício 1</h1>
-            <p>Enunciado</p>
+            <p>Crie um exercício que exiba a frase "Olá, Mundo!" ao final da execução.</p>
             <div>
-                <form action="" method="post">
+                <form>
                     <input type="submit" value="Executar" name="executar">
                 </form>
+            </div>
+            <div>
+            <?php
+            $exec = $_GET["executar"];
+            var_dump($exec);
+            //echo "Olá, Mundo!";
+            ?>
             </div>
         </section>
     </main>
     
+
 </body>
 </html>
