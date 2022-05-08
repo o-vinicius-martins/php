@@ -9,20 +9,25 @@
 </head>
 <body>
     <main>
+        <?php
+        $btn = 0;
+        function Escrever(string $msg)
+        {
+            echo $msg;
+        }
+        ?>
         <section>
             <h1>Exercício 1</h1>
             <p>Crie um exercício que exiba a frase "Olá, Mundo!" ao final da execução.</p>
             <div>
-                <form>
-                    <input type="submit" value="Executar" name="executar">
-                </form>
+                <input type="submit" value="Executar" name="executar" onclick="">
             </div>
-            <div>
-            <?php
-            $exec = $_GET["executar"];
-            var_dump($exec);
-            //echo "Olá, Mundo!";
+            <script>
+            <?php  
+            echo $btn;
             ?>
+            </script>
+            <div>
             </div>
         </section>
     </main>
