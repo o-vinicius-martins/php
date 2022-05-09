@@ -19,10 +19,6 @@
         <section>
             <h1>Exercício 1</h1>
             <p>Crie um exercício que exiba a frase "Olá, Mundo!" ao final da execução.</p>
-            <div>
-                <input type="submit" value="Executar" name="executar" onclick="">
-            </div>
-            <script>
             <?php  
             echo $btn;
             ?>
